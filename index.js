@@ -75,5 +75,28 @@ $(document).ready(function(){
         }
     });
 
+    //Product Quantity
+    var $upBtn = $(".qty .qty-up");
+    var $downBtn = $(".qty .qty-down");
+    //var $input = $(".qty .qty-input");
+
+    $upBtn.click(function(e) {
+        let $input = $(`.qty-input[data-id='${$(this).data("id")}']`)
+        if($input.val() >= 1 && $input.val() <= 9){
+            $input.val(function(i, oldval){
+                return ++oldval;
+            });
+        }
+    });
+
+    $downBtn.click(function (e) {
+        let $input = $(`.qty-input[data-id='${$(this).data("id")}']`)
+        if ($input.val() > 1 && $input.val() <= 10) {
+            $input.val(function (i, oldval) {
+                return --oldval;
+            });
+        }
+    });
+
 
 });

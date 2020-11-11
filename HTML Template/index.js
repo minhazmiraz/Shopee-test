@@ -1,4 +1,4 @@
-$(document).ready(function () {
+$(document).ready(function(){
 
 
     //Banner owl carousel
@@ -12,20 +12,20 @@ $(document).ready(function () {
 
     //Top Sale Owl Carousel
     $("#top-sale .owl-carousel").owlCarousel({
-        loop: true,
-        nav: true,
-        dots: false,
-        responsive: {
-            0: {
-                items: 1
-            },
-            600: {
-                items: 3
-            },
-            1000: {
-                items: 5
-            }
-        }
+       loop: true,
+       nav: true,
+       dots: false,
+       responsive:{
+           0:{
+               items: 1
+           },
+           600:{
+               items: 3
+           },
+           1000:{
+               items:5
+           }
+       }
     });
 
     //Isotope Filter
@@ -35,9 +35,9 @@ $(document).ready(function () {
     });
 
     //filter items on button click
-    $(".button-group").on("click", "button", function () {
+    $(".button-group").on("click", "button", function(){
         var filterValue = $(this).attr("data-filter");
-        $grid.isotope({ filter: filterValue });
+        $grid.isotope({filter: filterValue});
     });
 
 
@@ -80,10 +80,10 @@ $(document).ready(function () {
     var $downBtn = $(".qty .qty-down");
     //var $input = $(".qty .qty-input");
 
-    $upBtn.click(function (e) {
+    $upBtn.click(function(e) {
         let $input = $(`.qty-input[data-id='${$(this).data("id")}']`)
-        if ($input.val() >= 1 && $input.val() <= 9) {
-            $input.val(function (i, oldval) {
+        if($input.val() >= 1 && $input.val() <= 9){
+            $input.val(function(i, oldval){
                 return ++oldval;
             });
         }

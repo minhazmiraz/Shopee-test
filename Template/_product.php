@@ -1,8 +1,15 @@
+<?php
+    $item_id = $_GET['item_id'];
+    $product_shuffle = $product->getData();
+    foreach($product_shuffle as $item){
+        if($item['item_id'] == $item_id){
+?>
+
 <section id="product" class="py-3">
     <div class="container">
         <div class="row">
             <div class="col-sm-6">
-                <img src="./assets/products/1.png" alt="product" class="img-fluid">
+                <img src="<?php echo $item['item_image'] ?? "./assets/products/1.png"; ?>" alt="product" class="img-fluid">
                 <div class="form-row font-baloo font-size-12 pt-4">
                     <div class="col">
                         <button type="submit" class="btn btn-danger form-control">Proceed to Buy</button>
@@ -13,8 +20,8 @@
                 </div>
             </div>
             <div class="col-sm-6 py-5">
-                <h4 class="font-baloo font-size-20">Samsung galaxy S10</h4>
-                <small>By Samsung</small>
+                <h4 class="font-baloo font-size-20"><?php echo $item['item_name'] ?? "Unknown"; ?></h4>
+                <small>By <?php echo $item['item_brand'] ?? "Brand"; ?></small>
                 <div class="d-flex">
                     <div class="rating text-warning font-size-12">
                         <span><i class="fas fa-star"></i></span>
@@ -31,11 +38,11 @@
                 <table class="my-3">
                     <tr class="font-rale font-size-14">
                         <td>M.R.P.</td>
-                        <td><strike>$162.00</strike></td>
+                        <td><strike>$<?php echo $item['item_price'] + 10.00 ?? 0; ?></strike></td>
                     </tr>
                     <tr class="font-rale font-size-14">
                         <td>Deal Price</td>
-                        <td><span class="font-size-20 text-danger">$152.00</span><small>&nbsp; &nbsp;inclusive of all taxes</small></td>
+                        <td><span class="font-size-20 text-danger">$<?php echo $item['item_price'] ?? 0; ?></span><small>&nbsp; &nbsp;inclusive of all taxes</small></td>
                     </tr>
                     <tr class="font-rale font-size-14">
                         <td>You Save</td>
@@ -135,3 +142,8 @@
         </div>
     </div>
 </section>
+
+<?php
+        }
+    }
+?>

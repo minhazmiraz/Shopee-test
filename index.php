@@ -1,6 +1,4 @@
 <?php
-    ob_start();
-
     include('header.php');
 
     include('Template/_banner-area.php');

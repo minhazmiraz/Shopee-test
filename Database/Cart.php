@@ -34,8 +34,30 @@ class Cart{
             $result = $this->insertIntoCart($param);
             
             if($result){
-                header('Location', $_SERVER['PHP_SELF']);
+                header('Location: ' . $_SERVER['PHP_SELF']);
             }
+        }
+    }
+
+    public function deleteFromCart($item_id = null, $table = 'cart'){
+        if($item_id != null){
+            $result = $this->db->conn->query("DELETE FROM {$table} WHERE item_id = {$item_id}");
+
+            if($result){
+                header('Location: ' . $_SERVER['PHP_SELF']);
+            }
+
+            return $result;
+        }
+    }
+
+    public function getCartId($cart_item = null, $key = 'item_id'){
+        if($cart_item != null){
+            $cart_item_id = array_map(function($item) use($key) {
+                return $item[$key];
+            }, $cart_item);
+
+            return $cart_item_id;
         }
     }
 }

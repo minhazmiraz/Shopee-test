@@ -10,6 +10,9 @@
             $cart->addToCart($_POST['user_id'], $_POST['item_id']);
         }
     }
+
+    $cart_item_id = $cart->getCartId($product->getData('cart'));
+
 ?>
 <section id="special-price">
     <div class="container py-5">
@@ -23,7 +26,7 @@
         </div>
 
         <div class="grid">
-            <?php array_map(function($item){ ?>
+            <?php array_map(function($item) use($cart_item_id) { ?>
             <div class="grid-item <?=$item['item_brand'] ?? "Brand"?> border">
                 <div class="item py-2" style="width: 200px;">
                     <div class="product font-rale">
@@ -44,7 +47,13 @@
                             <form method="post">
                                 <input type="hidden" name="user_id" value="<?php echo 1; ?>">
                                 <input type="hidden" name="item_id" value="<?php echo $item['item_id'] ?? "1"; ?>">
-                                <button type="submit" name="button_special_price" class="btn btn-warning font-size-12">Add to cart</button>
+                                <?php
+                                    if(in_array($item['item_id'], isset($cart_item_id) ? $cart_item_id : [])){
+                                        echo '<button type="submit" disabled class="btn btn-success font-size-12">In the cart</button>';
+                                    } else{
+                                        echo '<button type="submit" name="button_special_price" class="btn btn-warning font-size-12">Add to cart</button>';
+                                    }
+                                ?>
                             </form>
                         </div>
                     </div>

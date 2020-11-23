@@ -2,22 +2,22 @@
 <?php
     if($_SERVER['REQUEST_METHOD']=='POST'){
         if(isset($_POST['button_cart_delete'])){
-            $deletedrecord = $cart->deleteFromCart($_POST['item_id']);
+            $deletedrecord = $cart->deleteFromCart($_POST['item_id'], 'wishlist');
         }
 
-        if(isset($_POST['button_save_for_later'])){
-            $cart->saveForLater($_POST['item_id']);
+        if(isset($_POST['button_add_to_cart'])){
+            $cart->saveForLater($_POST['item_id'], 'cart', 'wishlist');
         }
     }
 ?>
 
 <section id="cart" class="py-3">
     <div class="container-fluid w-75">
-        <h5 class="font-baloo font-size-20">Shopping Cart</h5>
+        <h5 class="font-baloo font-size-20">Wishlist</h5>
         <div class="row">
             <div class="col-sm-9">
                 <?php
-                    $cartData = $product->getData('cart');
+                    $cartData = $product->getData('wishlist');
                     $subtotal = 0;
                     foreach($cartData as $cartItem){
                         $result = $product->getProduct($cartItem['item_id']);
@@ -40,20 +40,14 @@
                                 <a href="#" class="font-rale font-size-12 px-2">20,543 ratings</a>
                             </div>
                             <div class="d-flex pt-2">
-                                <div class="qty d-flex font-rale w-25">
-                                    <button class="qty-up border bg-light" data-id="<?php echo $result[0]['item_id']; ?>"><i class="fas fa-angle-up"></i></button>
-                                    <input type="text" data-id="<?php echo $result[0]['item_id']; ?>" class="qty-input border px-2 w-100 bg-light text-center" disabled value="1" placeholder="1">
-                                    <button data-id="<?php echo $result[0]['item_id']; ?>" class="qty-down border bg-light"><i class="fas fa-angle-down"></i></button>
-                                </div>
-
                                 <form method="post">
                                     <input type="hidden" name="item_id" value="<?php echo $result[0]['item_id']; ?>">
-                                    <button type="submit" name="button_cart_delete" class="btn font-baloo text-danger border-right px-3">Delete</button>
+                                    <button type="submit" name="button_cart_delete" class="btn font-baloo text-danger border-right pl-0 pr-3">Delete</button>
                                 </form>
 
                                 <form method="post">
                                     <input type="hidden" name="item_id" value="<?php echo $result[0]['item_id']; ?>">
-                                    <button type="submit" name="button_save_for_later" class="btn font-baloo text-danger px-3">Save for later</button>
+                                    <button type="submit" name="button_add_to_cart" class="btn font-baloo text-danger px-3">Add to cart</button>
                                 </form>
                             </div>
                         </div>
@@ -67,15 +61,6 @@
                         $subtotal += floatval($result[0]['item_price']);
                     }
                 ?>
-            </div>
-            <div class="col-sm-3">
-                <div class="sub-total border mt-2 text-center">
-                    <h6 class="font-rale font-size-12 text-success py-3"><i class="fas fa-check"></i> Your order is eligible for free delivery</h6>
-                    <div class="border-top py-4">
-                        <h5 class="font-rale font-size-16">Subtotal (<?php echo count($cartData); ?> Item):&nbsp;<span class="text-danger">$<span class="text-danger deal-price" id="deal-price"><?php echo $subtotal; ?></span></span></h5>
-                        <button type="submit" class="btn btn-warning mt-3">Proceed to buy</button>
-                    </div>
-                </div>
             </div>
         </div>
     </div>

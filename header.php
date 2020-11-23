@@ -40,13 +40,13 @@
             <p class="font-rale font-size-12 text-black-50 m-0">560 Graysville Rd, Guthrie, KY, 42234</p>
             <div class="font-rale font-size-14">
                 <a href="#" class="px-3 border-right border-left text-dark">Login</a>
-                <a href="#" class="px-3 border-right text-dark">Wishlist (0)</a>
+                <a href="#" class="px-3 border-right text-dark">Wishlist (<?=count($product->getData('wishlist'))?>)</a>
             </div>
         </div>
 
         <!-- Primary Navigation Bar -->
         <nav class="navbar navbar-expand-lg navbar-dark color-second-bg">
-            <a class="navbar-brand" href="#">Shopee Test</a>
+            <a class="navbar-brand" href="./">Shopee Test</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
